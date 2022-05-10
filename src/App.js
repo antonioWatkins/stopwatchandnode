@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import StopWatch from './Components/StopWatch/StopWatch';
+import {useState,useEffect} from 'react'
+
 
 function App() {
+
+   
+    const [intialState, setInitialState] =useState([])
+
+    useEffect(() => {
+      fetch('/api/').then(res =>{
+        if(res.ok){
+          return res.json()
+        }
+      
+    }).then(jsonResponse => setInitialState(jsonResponse))
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+    <StopWatch />
     </div>
   );
 }
